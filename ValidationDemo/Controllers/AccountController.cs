@@ -30,5 +30,44 @@ namespace ValidationDemo.Controllers
             return View();
         }
 
+        //Method for remote validation
+        [AcceptVerbs("Get", "Post")]
+        public IActionResult ChekUserName(string userName)
+        {
+            //Simulte checking UserName against a database
+            var takenUserName = new List<string> {"admin", "root","sytem", "modorater","user" };
+            if (takenUserName.Contains(userName.ToLower()){
+                return Json($"The username {userName}is already taken.");
+            }
+            ;
+            return Json(true);
+        }
+
+        //Get: /Account /Register
+        public IActionResult Register()
+        {
+            return View();
+        }
+
+        //Post: /Account /Register
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Register(UserRegistration model)
+        {
+            if (ModelState.IsValid)
+            {
+                return View(model);
+            }
+            return RedirectToAction("Registration Success");
+
+        }
+        //Get: /Account /Registration Success
+        [HttpGet]
+        public IActionResult RegistrationSuccess()
+        {
+            return View();
+        }
+
+
     }
 }
