@@ -35,8 +35,8 @@ namespace ValidationDemo.Controllers
         public IActionResult ChekUserName(string userName)
         {
             //Simulte checking UserName against a database
-            var takenUserName = new List<string> {"admin", "root","sytem", "modorater","user" };
-            if (takenUserName.Contains(userName.ToLower()){
+            var takenUserName = new List<string> { "admin", "root", "sytem", "modorater", "user" };
+            if (takenUserName.Contains(userName.ToLower())){
                 return Json($"The username {userName}is already taken.");
             }
             ;
